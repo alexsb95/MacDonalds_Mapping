@@ -1,0 +1,39 @@
+---
+title: "R Markdown and Leaflet Project"
+author: "Alexander Sanchez"
+date: "2/7/2020"
+output: html_document
+---
+`
+
+## MacDonald's locations in Costa Rica
+
+
+```{r createMap, echo =FALSE}
+library(leaflet)
+
+macInfo <- c(
+    "McDonald's",
+    "McDonald's",
+    "McDonald's",
+    "McDonald's",
+    "McDonald's"
+)
+
+macIcon <- makeIcon(
+    iconUrl = "https://img.utdstc.com/icons/mcdonalds-usa-llc-mcdonald-android.png:l",
+    iconWidth =  31*215/230 ,iconHeight = 31,
+    iconAnchorX = 3*215/230/2, iconAnchorY = 16
+)
+
+macPoints <- data.frame(lat = c(9.894261, 9.885805, 9.892485, 9.9009440, 9.892992),
+                         lng = c(-84.081528, -84.06976, -84.063160, -84.068224, -84.080241));
+
+my_map <- macPoints %>%
+    leaflet() %>% 
+    addTiles() %>%
+    addMarkers(icon = macIcon, popup = macInfo)
+
+my_map
+```
+
